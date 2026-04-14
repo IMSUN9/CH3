@@ -43,8 +43,8 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public List<GetScheduleResponse> getSchedules() {
-        return scheduleService.getSchedules();
+    public List<GetScheduleResponse> getSchedules(@RequestParam(required = false) String writerName) {
+        return scheduleService.getSchedules(writerName);
     }
 
     @GetMapping("/{scheduleId}")

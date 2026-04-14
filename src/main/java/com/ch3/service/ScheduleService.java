@@ -26,8 +26,14 @@ public class ScheduleService {
         return scheduleRepository.save(schedule);
     }
 
-    public List<GetScheduleResponse> getSchedules() {
-        List<Schedule> scheduleList = scheduleRepository.findAllByOrderByUpdatedAtDesc();
+    public List<GetScheduleResponse> getSchedules(String writerName) {
+        List<Schedule> scheduleList;
+
+        if (writerName == null || writerName.isBlank()) {
+            scheduleList = scheduleRepository.findAllByOrderByUpdatedAtDesc();
+        } else {
+            scheduleList = scheduleRepository.findAllByWriterNameOrderByUpdatedAtDesc(writerName);
+        }
 
         List<GetScheduleResponse> responseList = new ArrayList<>();
 
