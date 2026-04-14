@@ -54,7 +54,7 @@ public class Schedule {
         this.writerName = writerName;
     }
 
-    public boolean isPasswordMatcg(String password) {
+    public boolean isPasswordMatch(String password) {
         return this.password.equals(password);
     }
 
