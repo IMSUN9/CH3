@@ -81,4 +81,16 @@ public class ScheduleService {
         );
     }
 
+    @Transactional
+    public void deleteSchedule(Long scheduleId, String password) {
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 일정을 찾을 수 없습니다."));
+
+        if (!schedule.isPasswordMatch(password)) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        scheduleRepository.delete(schedule);
+    }
+
 }

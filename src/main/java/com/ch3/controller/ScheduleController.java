@@ -1,9 +1,6 @@
 package com.ch3.controller;
 
-import com.ch3.dto.CreateScheduleRequest;
-import com.ch3.dto.CreateScheduleResponse;
-import com.ch3.dto.GetScheduleResponse;
-import com.ch3.dto.UpdateScheduleRequest;
+import com.ch3.dto.*;
 import com.ch3.entity.Schedule;
 import com.ch3.service.ScheduleService;
 import org.springframework.http.HttpStatus;
@@ -68,5 +65,13 @@ public class ScheduleController {
         );
     }
 
+    @DeleteMapping("/{scheduleId}")
+    public DeleteScheduleResponse deleteSchedule(
+            @PathVariable Long scheduleId,
+            @RequestBody DeleteScheduleRequest request
+    ) {
+        scheduleService.deleteSchedule(scheduleId, request.getPassword());
+        return new DeleteScheduleResponse("일정 삭제 완료");
+    }
 
 }
